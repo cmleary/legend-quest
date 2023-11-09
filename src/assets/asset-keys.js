@@ -1,10 +1,15 @@
 export const BATTLE_BACKGROUND_ASSET_KEYS = Object.freeze({
   FOREST: 'FOREST',
+  FROZEN_FOREST: 'FROZEN_FOREST',
 });
 
-export const MONSTER_ASSET_KEYS = Object.freeze({
-  IGUANIGNITE: 'IGUANIGNITE',
-  CARNODUSK: 'CARNODUSK',
+export const SPRITE_ASSET_KEYS = Object.freeze({
+  SAMUS: 'SAMUS',
+  MEGAMAN: 'MegaMan',
+  SLIME: 'Slime',
+  BEG_KNIGHT: 'Farquad',
+  ADV_KNIGHT: 'Greg',
+  DRAGON: 'Northen Emperor',
 });
 
 export const BATTLE_ASSET_KEYS = Object.freeze({

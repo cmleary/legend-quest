@@ -5,7 +5,7 @@
 /** @enum {BattleMenuOptions} */
 export const BATTLE_MENU_OPTIONS = Object.freeze({
   FIGHT: 'FIGHT',
-  SWITCH: 'SWITCH',
+  MAGIC: 'MAGIC',
   ITEM: 'ITEM',
   FLEE: 'FLEE',
 });
@@ -31,6 +31,6 @@ export const ACTIVE_BATTLE_MENU = Object.freeze({
   BATTLE_MAIN: 'BATTLE_MAIN',
   BATTLE_MOVE_SELECT: 'BATTLE_MOVE_SELECT',
   BATTLE_ITEM: 'BATTLE_ITEM',
-  BATTLE_SWITCH: 'BATTLE_SWITCH',
+  BATTLE_MAGIC: 'BATTLE_MAGIC',
   BATTLE_FLEE: 'BATTLE_FLEE',
 });

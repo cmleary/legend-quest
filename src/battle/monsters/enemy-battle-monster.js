@@ -6,6 +6,8 @@ const ENEMY_POSITION = Object.freeze({
   y: 144,
 });
 
+  
+
 export class EnemyBattleMonster extends BattleMonster {
   /**
    *

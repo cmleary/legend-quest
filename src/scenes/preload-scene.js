@@ -3,7 +3,7 @@ import {
   BATTLE_BACKGROUND_ASSET_KEYS,
   DATA_ASSET_KEYS,
   HEALTH_BAR_ASSET_KEYS,
-  MONSTER_ASSET_KEYS,
+  SPRITE_ASSET_KEYS,
   UI_ASSET_KEYS,
 } from '../assets/asset-keys.js';
 import Phaser from '../lib/phaser.js';
@@ -19,13 +19,17 @@ export class PreloadScene extends Phaser.Scene {
   preload() {
     console.log(`[${PreloadScene.name}:preload] invoked`);
 
-    const monsterTamerAssetPath = 'assets/images/monster-tamer';
+    const visualsAssetPath = 'assets/images/visuals';
     const kenneysAssetPath = 'assets/images/kenneys-assets';
 
     // battle backgrounds
     this.load.image(
       BATTLE_BACKGROUND_ASSET_KEYS.FOREST,
-      `${monsterTamerAssetPath}/battle-backgrounds/forest-background.png`
+      `${visualsAssetPath}/battle-backgrounds/forest_bg.png`
+    );
+    this.load.image(
+      BATTLE_BACKGROUND_ASSET_KEYS.FROZEN_FOREST,
+      `${visualsAssetPath}/battle-backgrounds/frozen_forest.jpg`
     );
 
     // battle assets
@@ -56,11 +60,16 @@ export class PreloadScene extends Phaser.Scene {
     );
 
     // monster assets
-    this.load.image(MONSTER_ASSET_KEYS.CARNODUSK, `${monsterTamerAssetPath}/monsters/carnodusk.png`);
-    this.load.image(MONSTER_ASSET_KEYS.IGUANIGNITE, `${monsterTamerAssetPath}/monsters/iguanignite.png`);
+    this.load.image(SPRITE_ASSET_KEYS.SAMUS, `${visualsAssetPath}/fighters/samus.png`);
+    this.load.image(SPRITE_ASSET_KEYS.MEGAMAN, `${visualsAssetPath}/fighters/megaman.png`);
+    this.load.image(SPRITE_ASSET_KEYS.SLIME, `${visualsAssetPath}/fighters/Slime_0.png`);
+    this.load.image(SPRITE_ASSET_KEYS.BEG_KNIGHT, `${visualsAssetPath}/fighters/Knight_Beg.png`);
+    this.load.image(SPRITE_ASSET_KEYS.ADV_KNIGHT, `${visualsAssetPath}/fighters/Knight_Adv.png`);
+    this.load.image(SPRITE_ASSET_KEYS.DRAGON, `${visualsAssetPath}/fighters/Dragon.png`);
+
 
     // ui assets
-    this.load.image(UI_ASSET_KEYS.CURSOR, `${monsterTamerAssetPath}/ui/cursor.png`);
+    this.load.image(UI_ASSET_KEYS.CURSOR, `${visualsAssetPath}/ui/cursor.png`);
 
     // load json data
     this.load.json(DATA_ASSET_KEYS.ATTACKS, 'assets/data/attacks.json');

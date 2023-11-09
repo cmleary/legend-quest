@@ -1,5 +1,5 @@
 import Phaser from '../../../lib/phaser.js';
-import { MONSTER_ASSET_KEYS, UI_ASSET_KEYS } from '../../../assets/asset-keys.js';
+import { SPRITE_ASSET_KEYS, UI_ASSET_KEYS } from '../../../assets/asset-keys.js';
 import { DIRECTION } from '../../../common/direction.js';
 import { exhaustiveGuard } from '../../../utils/guard.js';
 import { ACTIVE_BATTLE_MENU, ATTACK_MOVE_OPTIONS, BATTLE_MENU_OPTIONS } from './battle-menu-options.js';
@@ -182,7 +182,7 @@ export class BattleMenu {
     this.#mainBattleMenuPhaserContainerGameObject = this.#scene.add.container(520, 448, [
       this.#createMainInfoSubPane(),
       this.#scene.add.text(55, 22, BATTLE_MENU_OPTIONS.FIGHT, BATTLE_UI_TEXT_STYLE),
-      this.#scene.add.text(240, 22, BATTLE_MENU_OPTIONS.SWITCH, BATTLE_UI_TEXT_STYLE),
+      this.#scene.add.text(240, 22, BATTLE_MENU_OPTIONS.MAGIC, BATTLE_UI_TEXT_STYLE),
       this.#scene.add.text(55, 70, BATTLE_MENU_OPTIONS.ITEM, BATTLE_UI_TEXT_STYLE),
       this.#scene.add.text(240, 70, BATTLE_MENU_OPTIONS.FLEE, BATTLE_UI_TEXT_STYLE),
       this.#mainBattleMenuCursorPhaserImageGameObject,
@@ -251,7 +251,7 @@ export class BattleMenu {
     if (this.#selectedBattleMenuOption === BATTLE_MENU_OPTIONS.FIGHT) {
       switch (direction) {
         case DIRECTION.RIGHT:
-          this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.SWITCH;
+          this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.MAGIC;
           return;
         case DIRECTION.DOWN:
           this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.ITEM;
@@ -266,7 +266,7 @@ export class BattleMenu {
       return;
     }
 
-    if (this.#selectedBattleMenuOption === BATTLE_MENU_OPTIONS.SWITCH) {
+    if (this.#selectedBattleMenuOption === BATTLE_MENU_OPTIONS.MAGIC) {
       switch (direction) {
         case DIRECTION.LEFT:
           this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.FIGHT;
@@ -308,7 +308,7 @@ export class BattleMenu {
           this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.ITEM;
           return;
         case DIRECTION.UP:
-          this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.SWITCH;
+          this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.MAGIC;
           return;
         case DIRECTION.RIGHT:
         case DIRECTION.DOWN:
@@ -332,7 +332,7 @@ export class BattleMenu {
       case BATTLE_MENU_OPTIONS.FIGHT:
         this.#mainBattleMenuCursorPhaserImageGameObject.setPosition(BATTLE_MENU_CURSOR_POS.x, BATTLE_MENU_CURSOR_POS.y);
         return;
-      case BATTLE_MENU_OPTIONS.SWITCH:
+      case BATTLE_MENU_OPTIONS.MAGIC:
         this.#mainBattleMenuCursorPhaserImageGameObject.setPosition(228, BATTLE_MENU_CURSOR_POS.y);
         return;
       case BATTLE_MENU_OPTIONS.ITEM:
@@ -481,13 +481,13 @@ export class BattleMenu {
       return;
     }
 
-    if (this.#selectedBattleMenuOption === BATTLE_MENU_OPTIONS.SWITCH) {
+    if (this.#selectedBattleMenuOption === BATTLE_MENU_OPTIONS.MAGIC) {
       // TODO: add feature in a future update
       /*
         for the time being, we will display text about the player having no more monsters
         and allow the player to navigate back to the main menu
       */
-      this.#activeBattleMenu = ACTIVE_BATTLE_MENU.BATTLE_SWITCH;
+      this.#activeBattleMenu = ACTIVE_BATTLE_MENU.BATTLE_MAGIC;
       this.updateInfoPaneMessagesAndWaitForInput(['You have no other monsters in your party...'], () => {
         this.#switchToMainBattleMenu();
       });

@@ -1,12 +1,32 @@
 [
   {
     "id": 1,
-    "name": "ice shard",
+    "name": "Winter's Wrath",
     "animationName": "ICE_SHARD"
   },
   {
     "id": 2,
-    "name": "slash",
+    "name": "Slash",
     "animationName": "SLASH"
+  },
+  {
+    "id": 3,
+    "name": "Shield bash",
+    "animationName": "SHIELD_BASH"
+  },
+  {
+    "id": 4,
+    "name": "Pommel",
+    "animationName": "POMMEL"
+  },
+  {
+    "id": 5,
+    "name": "Wiggle",
+    "animationName": "Wiggle"
+  },
+  {
+    "id": 6,
+    "name": "'Parry this!'",
+    "animationName": "SHIELD_BASH"
   }
 ]

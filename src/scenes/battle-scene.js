@@ -1,5 +1,5 @@
 import Phaser from '../lib/phaser.js';
-import { MONSTER_ASSET_KEYS } from '../assets/asset-keys.js';
+import { SPRITE_ASSET_KEYS } from '../assets/asset-keys.js';
 import { BattleMenu } from '../battle/ui/menu/battle-menu.js';
 import { SCENE_KEYS } from './scene-keys.js';
 import { DIRECTION } from '../common/direction.js';
@@ -31,40 +31,38 @@ export class BattleScene extends Phaser.Scene {
 
   create() {
     console.log(`[${BattleScene.name}:create] invoked`);
-    // create main background
-    const background = new Background(this);
-    background.showForest();
 
-    // render out the player and enemy monsters
+    const background = new Background(this);
+    background.showFrozenForest();
+
     this.#activeEnemyMonster = new EnemyBattleMonster({
       scene: this,
       monsterDetails: {
-        name: MONSTER_ASSET_KEYS.CARNODUSK,
-        assetKey: MONSTER_ASSET_KEYS.CARNODUSK,
+        name: SPRITE_ASSET_KEYS.DRAGON,
+        assetKey: SPRITE_ASSET_KEYS.DRAGON,
         assetFrame: 0,
         currentHp: 25,
         maxHp: 25,
         attackIds: [1],
-        baseAttack: 25,
-        currentLevel: 5,
+        baseAttack: 80,
+        currentLevel: 35,
       },
     });
 
     this.#activePlayerMonster = new PlayerBattleMonster({
       scene: this,
       monsterDetails: {
-        name: MONSTER_ASSET_KEYS.IGUANIGNITE,
-        assetKey: MONSTER_ASSET_KEYS.IGUANIGNITE,
+        name: SPRITE_ASSET_KEYS.BEG_KNIGHT,
+        assetKey: SPRITE_ASSET_KEYS.BEG_KNIGHT,
         assetFrame: 0,
         currentHp: 25,
-        maxHp: 25,
-        attackIds: [2],
+        maxHp: 60,
+        attackIds: [2,3,4,6],
         baseAttack: 5,
-        currentLevel: 5,
+        currentLevel: 20,
       },
     });
 
-    // render out the main info and sub info panes
     this.#battleMenu = new BattleMenu(this, this.#activePlayerMonster);
     this.#battleMenu.showMainBattleMenu();
 
@@ -76,7 +74,6 @@ export class BattleScene extends Phaser.Scene {
     if (wasSpaceKeyPressed) {
       this.#battleMenu.handlePlayerInput('OK');
 
-      //check if the player selected an attack, and update display text
       if (this.#battleMenu.selectedAttack === undefined) {
         return;
       }
@@ -116,13 +113,6 @@ export class BattleScene extends Phaser.Scene {
   }
 
   #handleBattleSequence() {
-    // general battle flow
-    // show attack used, brief pause
-    // then play attack animation, brief pause
-    // then play damage animation, brief pause
-    // then play health bar animation, brief pause
-    // then repeat the steps above for the other monster
-
     this.#playerAttack();
   }
 
@@ -164,7 +154,7 @@ export class BattleScene extends Phaser.Scene {
   #postBattleSequenceCheck() {
     if (this.#activeEnemyMonster.isFainted) {
       this.#battleMenu.updateInfoPaneMessagesAndWaitForInput(
-        [`Wild ${this.#activeEnemyMonster.name} fainted`, 'You have gained some experience'],
+        [`The ${this.#activeEnemyMonster.name} has been slain`, 'You are victorious!'],
         () => {
           this.#transitionToNextScene();
         }
@@ -174,7 +164,7 @@ export class BattleScene extends Phaser.Scene {
 
     if (this.#activePlayerMonster.isFainted) {
       this.#battleMenu.updateInfoPaneMessagesAndWaitForInput(
-        [`${this.#activePlayerMonster.name} fainted`, 'You have no more monsters, escaping to safety...'],
+        [`${this.#activePlayerMonster.name} has perished`, 'Your legend ends here.'],
         () => {
           this.#transitionToNextScene();
         }
@@ -186,9 +176,13 @@ export class BattleScene extends Phaser.Scene {
   }
 
   #transitionToNextScene() {
-    this.cameras.main.fadeOut(600, 0, 0, 0);
+    this.cameras.main.fadeOut(500, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start(SCENE_KEYS.BATTLE_SCENE);
+      //if (this.#activeEnemyMonster.isFainted){
+          this.scene.start(SCENE_KEYS.STORY_SCENE);
+      //}
     });
   }
+
+  
 }

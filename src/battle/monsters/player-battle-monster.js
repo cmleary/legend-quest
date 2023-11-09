@@ -16,9 +16,7 @@ export class PlayerBattleMonster extends BattleMonster {
    */
   constructor(config) {
     super(config, PLAYER_POSITION);
-    this._phaserGameObject.setFlipX(true);
     this._phaserHealthBarGameContainer.setPosition(556, 318);
-
     this.#addHealthBarComponents();
   }
 
