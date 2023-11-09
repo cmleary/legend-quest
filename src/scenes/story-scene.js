@@ -1,8 +1,7 @@
 import Phaser from '../lib/phaser.js';
 import { SCENE_KEYS } from './scene-keys.js';
 
-let storyString = "Sir Farquad valiantly faced a slime, armed with a toothpick and unparalleled bravado. The slime trembled (or maybe it just jiggled slightly), securing Farquad's legendary status as the unparalleled Slayer of Slime."
-let storyDeath = "Farquad, the conqueror, met his match with the mythical ice dragon, Northern Emperor. Amidst frozen roars and glinting scales, Farquad's sword fell powerless. The once indomitable ruler succumbed to the icy breath, his legend extinguished in the chilling embrace of defeat, leaving tales of the vanquished echoing through the frozen realms."
+let storyGen =''
 
 export class StoryScene extends Phaser.Scene {
     /** @type {array} */
@@ -26,23 +25,23 @@ export class StoryScene extends Phaser.Scene {
     let prompt2 = 'Farquad the knight has been defeated by the Ice Dragon, Northern Emperor, his legend ends here'
     let genStory = []
     
-    // console.log(prompt)
-    // fetch('http://127.0.0.1:5000/storyGenerator', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({prompt}),
-    // })
-    //   .then((response) => {
-    //     console.log(response.ok);
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     genStory.push(data)
-    //     console.log(genStory[0].data.join().replace(",",""))
-    //     storyString = (genStory[0].data.join().replace(",",""))
-    //     storyString = storyString.replace(/,/g,"")
-    //     console.log(storyString)
-    //   })
+    console.log(prompt)
+    fetch('http://127.0.0.1:5000/storyGenerator', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({prompt}),
+    })
+      .then((response) => {
+        console.log(response.ok);
+        return response.json();
+      })
+      .then((data) => {
+        genStory.push(data)
+        console.log(genStory[0].data.join().replace(",",""))
+        storyGen = (genStory[0].data.join().replace(",",""))
+        storyGen = storyGen.replace(/,/g,"")
+        console.log(storyGen)
+      })
     var url;
   
   url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js';
@@ -71,7 +70,7 @@ export class StoryScene extends Phaser.Scene {
    maxLines: 7
   });
   
-  text.appendContent(`${storyDeath}`, 70);
+  text.appendContent(`${storyGen}`, 70);
   
   // text.setInteractive().on('pointerup', function () {
   //   text.startNext()
